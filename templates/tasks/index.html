@@ -19,6 +19,15 @@
           {% else %}
             <span class="font-weight-bold" style="color: red">Not done</span>
           {% endif %}
+          {% if task.completed %}
+            <a href="{% url 'tasks:toggle-task-done' pk=task.id %}" class="btn btn-secondary link-to-page">
+              Undo
+            </a>
+          {% else %}
+            <a href="{% url 'tasks:toggle-task-done' pk=task.id %}" class="btn btn-success link-to-page">
+              Complete
+            </a>
+          {% endif %}
           <br>
           <small>Created: {{ task.created }}
           {% if task.deadline %}
@@ -31,6 +40,7 @@
           {% endfor %}
           <a href="{% url 'tasks:task-update' pk=task.id %}">Update</a>
           <a href="{% url 'tasks:task-delete' pk=task.id %}">Delete</a>
+
         </li>
       {% endfor %}
     </ul>
