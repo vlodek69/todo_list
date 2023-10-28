@@ -8,6 +8,6 @@ class Tag(models.Model):
 class Task(models.Model):
     content = models.CharField(max_length=255)
     created = models.DateField(auto_now_add=True)
-    deadline = models.DateField(blank=True)
+    deadline = models.DateTimeField(blank=True, null=True)
     completed = models.BooleanField()
     tags = models.ManyToManyField(Tag, related_name="tasks")
