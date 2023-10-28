@@ -5,13 +5,20 @@
   <h1>TODO list</h1>
 
   {% if task_list %}
-    {% for task in task_list %}
-      {{ task.content }}
-      Status: {{ task.completed }}
-      Created: {{ task.created }}
-      Deadline: {{ task.deadline }}
-      Tags:
-    {% endfor %}
+    <ul class="list-group list-group-flush">
+      {% for task in task_list %}
+        <li class="list-group-item">
+          {{ task.content }}<br>
+          Status: {{ task.completed }}<br>
+          Created: {{ task.created }}<br>
+          Deadline: {{ task.deadline }}<br>
+          Tags:
+          {% for tag in task.tags.all %}
+            {{ tag.name }}
+          {% endfor %}
+        </li>
+      {% endfor %}
+    </ul>
   {% else %}
     <p>No tasks to do</p>
   {% endif %}
