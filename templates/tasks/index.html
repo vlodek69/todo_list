@@ -11,7 +11,9 @@
           {{ task.content }}<br>
           Status: {{ task.completed }}<br>
           Created: {{ task.created }}<br>
-          Deadline: {{ task.deadline }}<br>
+          {% if task.deadline %}
+            Deadline: {{ task.deadline }}<br>
+          {% endif %}
           Tags:
           {% for tag in task.tags.all %}
             {{ tag.name }}
