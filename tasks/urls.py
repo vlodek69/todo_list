@@ -1,8 +1,16 @@
 from django.urls import path
 
-from tasks.views import TaskListView, TaskCreateView, TaskUpdateView, \
-    TaskDeleteView, TagListView, TagCreateView, TagUpdateView, TagDeleteView, \
-    toggle_complete_undo
+from tasks.views import (
+    TaskListView,
+    TaskCreateView,
+    TaskUpdateView,
+    TaskDeleteView,
+    TagListView,
+    TagCreateView,
+    TagUpdateView,
+    TagDeleteView,
+    ToggleCompleteUndo
+)
 
 urlpatterns = [
     path("", TaskListView.as_view(), name="index"),
@@ -23,7 +31,7 @@ urlpatterns = [
     ),
     path(
         "tasks/<int:pk>/toggle-done/",
-        toggle_complete_undo,
+        ToggleCompleteUndo.as_view(),
         name="toggle-task-done",
     ),
 ]
