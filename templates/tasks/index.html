@@ -13,31 +13,34 @@
     <ul class="list-group list-group-flush">
       {% for task in task_list %}
         <li class="list-group-item">
+
           <span class="font-weight-bold">{{ task.content }}</span>
           {% if task.completed %}
             <span class="font-weight-bold" style="color: green">Done</span>
           {% else %}
             <span class="font-weight-bold" style="color: red">Not done</span>
           {% endif %}
-          {% if task.completed %}
-            <a href="{% url 'tasks:toggle-task-done' pk=task.id %}" class="btn btn-secondary link-to-page">
-              Undo
-            </a>
-          {% else %}
-            <a href="{% url 'tasks:toggle-task-done' pk=task.id %}" class="btn btn-success link-to-page">
-              Complete
-            </a>
-          {% endif %}
-          <br>
+
+          <form method="post">
+            {% csrf_token %}
+            {% if task.completed %}
+              <button type="submit" class="btn btn-secondary link-to-page" name="task_id" value="{{ task.id }}">Undo</button>
+            {% else %}
+              <button type="submit" class="btn btn-success link-to-page" name="task_id" value="{{ task.id }}">Complete</button>
+            {% endif %}
+          </form>
+
           <small>Created: {{ task.created }}
           {% if task.deadline %}
             Deadline: {{ task.deadline }}
           {% endif %}
           </small><br>
+
           Tags:
           {% for tag in task.tags.all %}
             {{ tag.name }}
           {% endfor %}
+
           <a href="{% url 'tasks:task-update' pk=task.id %}">Update</a>
           <a href="{% url 'tasks:task-delete' pk=task.id %}">Delete</a>
 

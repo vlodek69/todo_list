@@ -9,7 +9,6 @@ from tasks.views import (
     TagCreateView,
     TagUpdateView,
     TagDeleteView,
-    ToggleCompleteUndo
 )
 
 urlpatterns = [
@@ -28,11 +27,6 @@ urlpatterns = [
     ),
     path(
         "tags/<int:pk>/delete/", TagDeleteView.as_view(), name="tag-delete"
-    ),
-    path(
-        "tasks/<int:pk>/toggle-done/",
-        ToggleCompleteUndo.as_view(),
-        name="toggle-task-done",
     ),
 ]
 
